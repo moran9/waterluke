@@ -1,0 +1,28 @@
+{
+  "name": "waterluke",
+  "version": "1.0.0",
+  "description": "A web application for my son to remote control the model trains his grandfather bought for my boyfriend 30 years ago, which now has a new digital core based on arduino thanks to him.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moran9/waterluke.git"
+  },
+  "author": "Cristina Morán Capa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moran9/waterluke/issues"
+  },
+  "homepage": "https://github.com/moran9/waterluke#readme",
+  "dependencies": {
+    "fastify": "^4.23.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.2",
+    "typescript": "^5.2.2"
+  }
+}
