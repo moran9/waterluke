@@ -1,4 +1,6 @@
 import { fastify, FastifyInstance } from 'fastify';
+import { SerialPort } from 'serialport';
+import readline from 'readline';
 
 const server: FastifyInstance = fastify();
 
@@ -51,4 +53,46 @@ server.listen({ port: 8080 }, (err, address) => {
         process.exit(1);
     }
     console.log(`Server listening at ${address}`);
+});
+
+// SERIAL PORT TEST ////////////////////////////////////////////////////////
+
+const port = new SerialPort({
+    path: '/dev/ttyACM0',
+    baudRate: 115200, // o 9600
+    autoOpen: false,
+});
+
+port.open(function (err) {
+    if (err) {
+        return console.log('Error opening port: ', err.message);
+    }
+
+    // Because there's no callback to write, write errors will be emitted on the port:
+    port.write('main screen turn on');
+});
+
+// The open event is always emitted
+port.on('open', function () {
+    // open logic
+});
+
+const rl = readline.createInterface({
+    input: port,
+    crlfDelay: Infinity,
+    terminal: true,
+    history: [],
+    historySize: 3,
+});
+
+rl.on('line', (input) => {
+    console.log(`Received line: ${input}`);
+});
+
+rl.on('history', (history) => {
+    console.log(`Received history: ${history}`);
+});
+
+rl.on('close', () => {
+    // close logic
 });
