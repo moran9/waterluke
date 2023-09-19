@@ -21,7 +21,7 @@ type IReply = BasicReply | string;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.get('/ping', async (request, reply) => {
-    return 'pong\n';
+    reply.send({ hello: 'world' });
 });
 
 app.get<{
