@@ -11,6 +11,8 @@ import Configuration from './features/configuration/Configuration.tsx'
 import Theme from './theme.ts'
 import { ThemeProvider } from '@mui/material/styles'
 
+import './i18n'
+
 const router = createBrowserRouter([
     {
         path: '/',
