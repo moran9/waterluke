@@ -5,16 +5,6 @@ import { useTranslation } from 'react-i18next'
 import EsLang from '../../../assets/languages/es.svg?react'
 import EnLang from '../../../assets/languages/en.svg?react'
 
-type Languages = {
-    en: { nativeName: string }
-    es: { nativeName: string }
-}
-
-const lngs: Languages = {
-    en: { nativeName: 'English' },
-    es: { nativeName: 'Spanish' },
-}
-
 export function LaguangeSelector() {
     const { i18n } = useTranslation()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
