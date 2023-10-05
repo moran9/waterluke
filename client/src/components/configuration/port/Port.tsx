@@ -49,7 +49,7 @@ function Port() {
                     autoWidth
                     label="Port"
                 >
-                    {availablePorts.map((port) => (
+                    {availablePorts?.map((port) => (
                         <MenuItem value={port} key={port}>
                             {port}
                         </MenuItem>

@@ -1,9 +1,12 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
+import { api } from '../api'
+
+import { openSnackbar } from '../../app/slices/statusSlice'
 
 type InitialConfigurationState = {
     selectedPort: string
-    availablePorts: string[]
+    availablePorts: string[] | undefined
     status: 'idle' | 'loading' | 'failed'
 }
 
@@ -36,10 +39,15 @@ export const configurationSlice = createSlice({
     },
 })
 
-export const getPortsAsync = createAsyncThunk('configuration/getPorts', async () => {
-    const response = await new Promise((resolve) => setTimeout(() => resolve(['COM1S', 'COM2S', 'COM3S']), 200)) //getPorts();
-    // transform data from API to mach the store
-    return response as InitialConfigurationState['availablePorts']
+export const getPortsAsync = createAsyncThunk('configuration/getPorts', async (_, { dispatch }) => {
+    // TODO remove hardcode base url
+    const url = 'http://127.0.0.1:8080/api/serial-port/available-ports'
+
+    try {
+        return await api<string[] | string>(url)
+    } catch (e: unknown) {
+        dispatch(openSnackbar({ severity: 'error', text: (e as Error).message }))
+    }
 })
 
 export const { selectPort } = configurationSlice.actions

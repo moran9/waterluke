@@ -1,6 +1,12 @@
 import { fastify, FastifyInstance } from 'fastify'
+import cors from '@fastify/cors'
+import serialPortRoutes from './routes/serialPort'
 
-export const app: FastifyInstance = fastify({ logger: true })
+export const app: FastifyInstance = fastify({ logger: true }).register(cors, {
+    // put your options here
+})
+
+app.register(serialPortRoutes, { prefix: 'api/serial-port' })
 
 type IQuerystring = {
     username: string
@@ -18,11 +24,6 @@ type BasicReply = {
 }
 
 type IReply = BasicReply | string
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.get('/ping', async (request, reply) => {
-    reply.send({ hello: 'world' })
-})
 
 app.get<{
     Querystring: IQuerystring
@@ -44,3 +45,10 @@ app.get<{
         return `logged in!`
     },
 )
+
+type MisHeaders = {
+    'h-Cris': string
+}
+app.post<{ Body: number; Reply: string; Headers: MisHeaders }>('/auth', (request, reply) => {
+    reply.code(401).send(request.body.toString())
+})

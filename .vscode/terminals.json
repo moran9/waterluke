@@ -1,0 +1,13 @@
+{
+  "autorun": false,
+  "terminals": [
+    {
+      "name": "Client",
+      "commands": ["cd client", "npm run dev"]
+    },
+    {
+      "name": "Server",
+      "commands": ["cd server", "npm run dev"]
+    }
+  ]
+}
