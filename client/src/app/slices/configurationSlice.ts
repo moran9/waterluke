@@ -44,7 +44,7 @@ export const getPortsAsync = createAsyncThunk('configuration/getPorts', async (_
     const url = 'http://127.0.0.1:8080/api/serial-port/available-ports'
 
     try {
-        return await api<string[] | string>(url)
+        return await api<string[]>(url)
     } catch (e: unknown) {
         dispatch(openSnackbar({ severity: 'error', text: (e as Error).message }))
     }
