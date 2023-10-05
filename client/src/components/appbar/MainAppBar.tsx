@@ -42,7 +42,7 @@ function useRouteMatch(patterns: readonly string[]) {
 function MyTabs() {
     const { t } = useTranslation()
     const routeMatch = useRouteMatch(['/trains', '/configuration'])
-    const currentTab = routeMatch?.pattern?.path
+    const currentTab = routeMatch?.pattern?.path || '/trains'
 
     return (
         <Tabs value={currentTab} sx={{ marginLeft: '100px' }} textColor="secondary" indicatorColor="secondary">

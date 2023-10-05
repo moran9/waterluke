@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import ErrorPage from './ErrorPage'
-import Trains from './features/trains/Trains.tsx'
-import Configuration from './features/configuration/Configuration.tsx'
+import Trains from './components/trains/Trains.tsx'
+import Configuration from './components/configuration/Configuration.tsx'
 import Theme from './theme.ts'
 import { ThemeProvider } from '@mui/material/styles'
 
@@ -20,10 +20,15 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
+                index: true,
+                element: <Trains />,
+            },
+            {
                 path: 'trains',
                 element: <Trains />,
             },
             {
+                index: true,
                 path: 'configuration',
                 element: <Configuration />,
             },
